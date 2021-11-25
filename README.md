@@ -1,4 +1,5 @@
-# Scrivere una classe che definisce un oggetto di tipo "Proprietario" con i seguenti attributi:
+# Condominuium Exercise:
+Scrivere una classe che definisce un oggetto di tipo "Proprietario" con i seguenti attributi:
 - ID autoincrementale
 - Nome
 - Cognome
