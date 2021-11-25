@@ -30,3 +30,5 @@ richiamando i suoi metodi con le seguenti frequenze:
 
 
 Nel nostro condominio ci sono 10 appartamenti con un numero di occupanti da 1 a 5 per appartamento. La spesa per il riscaldamento è di 4 euro all'ora. La spesa per l'acqua è di 1 euro ogni 100 litri.
+
+Per ogni appartamento calcolare le spese annuali sapendo che il costo totale del riscaldamento viene suddiviso per metà in base ai millesimi e l'altra metà in base alle ore consumate da ogni unità immobiliare.
