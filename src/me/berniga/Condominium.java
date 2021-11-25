@@ -1,10 +1,17 @@
 package me.berniga;
 
-public class Condominium {
-    private final int WATERFEE = 1;
-    private final int HEATINGFEE = 4;
+import java.util.ArrayList;
 
-    public static void main(String[] args) {
-        // write your code here
+public class Condominium {
+    private static int condominiums = 0;
+    private final int id;
+    private int ownerId;
+    private ArrayList<Flat> flats;
+
+    //constructors
+    public Condominium(int ownerId) {
+        id = ++condominiums;
+        this.ownerId = ownerId;
     }
+
 }
