@@ -95,7 +95,7 @@ public class Flat {
     }
 
     public double costs() {
-        return (this.heatingTime * (HEATINGFEE + thousands)) + (this.waterConsumption / 100);
+        return (this.heatingTime * (HEATINGFEE + thousands)) + ((this.waterConsumption / 100)*WATERFEE);
     }
 
 }
