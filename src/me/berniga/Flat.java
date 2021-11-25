@@ -1,6 +1,8 @@
 package me.berniga;
 
 public class Flat {
+    private final int WATERFEE = 1;
+    private final int HEATINGFEE = 4;
     private static int flats = 0;
     private final int id;
     private int ownerId;
@@ -20,7 +22,6 @@ public class Flat {
         this.people = people;
         this.waterConsumption = 0;
         this.heatingTime = 0;
-        //thousand computation
     }
 
     //getters & setters
@@ -56,8 +57,8 @@ public class Flat {
         return thousands;
     }
 
-    public void setThousands(double thousands) {
-        this.thousands = thousands;
+    public void setThousands(double totSurface) {
+        this.thousands = (1000 * surface) / totSurface;
     }
 
     public int getPeople() {
@@ -85,12 +86,16 @@ public class Flat {
     }
 
     //methods
-    public void shower() {
-        this.waterConsumption += 50;
+    public void shower(int people) {
+        this.waterConsumption += (50 * people);
     }
 
     public void heating(int time) {
         this.heatingTime += time;
+    }
+
+    public double costs() {
+        return (this.heatingTime * (HEATINGFEE + thousands)) + (this.waterConsumption / 100);
     }
 
 }
