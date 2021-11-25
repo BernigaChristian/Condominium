@@ -1,4 +1,6 @@
 package me.berniga;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.time.LocalDate;
 import java.util.Random;
 public class YearSimulation {
@@ -36,6 +38,7 @@ public class YearSimulation {
     }
     public static void main(String[] args) {
         Condominium c1=condominiumList();
+        System.out.println(c1.surface());
         simulation(c1);
     }
 }
