@@ -27,6 +27,8 @@ public class Condominium {
         this.ownerId = ownerId;
     }
 
+    public ArrayList<Flat> getFlats() {return flats;}
+
     public int getFlatsNumber() {
         return flats.size();
     }

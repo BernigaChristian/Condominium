@@ -5,6 +5,7 @@ public class Owner {
     private final int id;
     private String name;
     private String surname;
+
     //constructors
     public Owner(String name, String surname) {
         id = ++owners;
@@ -24,8 +25,10 @@ public class Owner {
     public String getSurname() {
         return surname;
     }
+
     public void setSurname(String surname) {
         this.surname = surname;
     }
     //methods
+    public String toString(){return name+" "+surname;}
 }

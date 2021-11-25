@@ -1,5 +1,4 @@
 package me.berniga;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -23,22 +22,17 @@ public class YearSimulation {
             for(int i=0;i<date.lengthOfMonth();i++){
                 for(int k=0;k<c.getFlatsNumber();k++){
                     Flat temp=c.getFlat(k);
-                    temp.shower(new Random().nextInt(c.getFlat(k).getPeople())+1);
-                    if(j<4||j>9)   temp.heating((new Random().nextInt(5)+6)+((new Random().nextInt(4)+1)));
+                    temp.shower(new Random().nextInt(temp.getPeople())+1);
+                    if(j<4||j>9)   temp.heating((new Random().nextInt(5)+6)+((new Random().nextInt(5)+1)));
                 }
                 date=date.plusDays(1);
             }
         }
-        costs(c);
+       costs(c);
     }
-    public static void costs(Condominium c){
-        for(int i=0;i<c.getFlatsNumber();i++)
-            //c.getFlat(i).costs();
-            System.out.println(i+": "+c.getFlat(i).costs());
-    }
+    public static void costs(Condominium c){for(Flat flat:c.getFlats())     System.out.println("flat "+flat.getId()+": "+flat.costs());}
     public static void main(String[] args) {
         Condominium c1=condominiumList();
-        System.out.println(c1.surface());
         simulation(c1);
     }
 }
