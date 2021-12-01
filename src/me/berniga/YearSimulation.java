@@ -14,6 +14,7 @@ public class YearSimulation {
             owners[i]=new Owner(tempNames[i],tempSurnames[i]);
         return owners;
     }
+    
     //INSTANCING OF THE CONDOMINIUM ARRAY (RETURNS THE ARRAY)
     public static Condominium[] condominiumList(Owner[] owners){
         Condominium[] condominiums=new Condominium[3];
@@ -27,13 +28,23 @@ public class YearSimulation {
         }
         return condominiums;
     }
-    //RETURNS THE OWNER ID OF THE GIVEN NAME
+
+    /*FROM NAME TO ID
+   -----------------------------
+   - it returns the ID by taking a name String and searching in the owners list;
+    */
     public static int id(String name,Owner[] owners)    throws InvalidNameorIdException {
         for(Owner o:owners)
             if(o.getName().equalsIgnoreCase(name))  return o.getId();
         throw new InvalidNameorIdException();
     }
-    //SHOWS THE COSTS OF FLATS OF A OWNER OR SIMPLY THE FLATS (IT DEPENDS ON THE VARIABLE ACTION)
+
+    /*SHOW FLATS
+   -----------------------------
+   - the first one show all the flats of an owner or all the flats' costs (it depends on the 'action' parameter value);
+   - the second one shows the cost of a single flat in a coiched condominium;
+   - the third one shows the costs off all the flats in a coiched condominium;
+    */
     public static void showFlats(int ownerId,Condominium[] condominiums,int action){
         for(Condominium c:condominiums)
             for(Flat f:c.getFlats())
@@ -42,7 +53,7 @@ public class YearSimulation {
                     else    System.out.println(f.costsToString());
                 }
     }
-    //SHOWS THE COSTS OF A FLAT OF A CONDOMINIUM
+
     public static void showFlats(int flatId,Condominium condominium){
             for(Flat f:condominium.getFlats())
                     if(flatId==f.getId())   {
@@ -50,15 +61,23 @@ public class YearSimulation {
                         break;
                     }
     }
-    //SHOWS THE COSTS OF FLATS OF A CONDOMINIUM IN GENERAL
+
     public static void showFlats(Condominium condominium){
         for(Flat f:condominium.getFlats())
                 System.out.println(f.costsToString());
     }
-    //MANAGES THE INPUT COMMANDS
+
+    /*MANAGES INPUTS
+    -----------------------------
+    - the first switch is used to choice between the Owner area or the Condominium one;
+    - the others switches are used to choice between all the subOptions of the previous choices;
+    - inside the OWNER area you have to type the name of the owner to be able to log in his private area;
+    - inside this private area of the owner you can see all his flats info or all flats' costs;
+    - inside the CONDOMINIUM area you have to type the number (=id) of the condominium;
+    - inside this private area of the condominium you can see all flats' costs or a single one;
+     */
     public static void manageChoice(Condominium[] condominiums,Owner[] owners,String option){
         Scanner scan=new Scanner(System.in);
-        String subOption;
         switch(option){
             case "OWNER":
                 System.out.printf("\tPLEASE TYPE THE NAME TO LOG IN: ");
@@ -71,8 +90,8 @@ public class YearSimulation {
                     System.out.println("\t-Type ALL to see all his flats ");
                     System.out.println("\t-Type COST to see the costs of all his flats ");
                     System.out.printf("\t-Type your choice: ");
-                    subOption=scan.nextLine();
-                    switch(subOption){
+                    //subOption=scan.nextLine();
+                    switch(scan.nextLine()){
                         case "ALL":
                             System.out.println("\n\nThese are all the flats of "+ownerName);
                             showFlats(ownerId,condominiums,0);
@@ -83,8 +102,7 @@ public class YearSimulation {
                             showFlats(ownerId,condominiums,1);
                             System.out.println("------------------------------------------------------------------");
                             break;
-                        default:
-                            System.out.println("\tINVALID COMMAND");
+                        default: System.out.println("\tINVALID COMMAND");
                     }
                 }
                 catch(InvalidNameorIdException e){
@@ -102,8 +120,8 @@ public class YearSimulation {
                 System.out.println("\t-Type ALL to see the costs of all flats ");
                 System.out.println("\t-Type SINGLE to see the costs of a specified flat");
                 System.out.println("\t-Type your choice: ");
-                subOption=scan.nextLine();
-                switch(subOption){
+                //subOption=scan.nextLine();
+                switch(scan.nextLine()){
                     case "ALL":
                         showFlats(condominiums[condominium]);
                         break;
@@ -111,16 +129,21 @@ public class YearSimulation {
                         System.out.printf("\t-Type the number of the flat: ");
                         showFlats(scan.nextInt(),condominiums[condominium]);
                         break;
-                    default:
-                        System.out.println("\tINVALID COMMAND");
+                    default: System.out.println("\tINVALID COMMAND");
                 }
                 break;
-            default:
-                System.out.println("INVALID COMMAND");
+            default: System.out.println("INVALID COMMAND");
 
         }
     }
-    //SIMULATE A PERIOD OF 1 YEAR
+
+    /*1 YEAR SIMULATION
+    -----------------------------
+    - it creates a starting date (1st January 2022);
+    - there are 3 for (1st- the iteration of the months,2nd- the iteration of the days of that month,3rd- the iteration of the flats of a condominium);
+    - for each flat the number of people that uses the shower is randomized
+    - the heating and opening window methods are called only if the current month is smaller than 4 or bigger than 9 (WINTER AND SPRING)
+     */
     public static void simulation(Condominium c){
         LocalDate date=LocalDate.of(2022,1,1);
         for(int j=0;j<12;j++){
@@ -134,11 +157,13 @@ public class YearSimulation {
             }
         }
     }
-    //PRINTS THE COSTS FOR ALL THE FLATS OF A
+
+    //PRINTS THE COSTS FOR ALL THE FLATS OF A CONDOMINIUM
     public static void costs(Condominium c){
         for(Flat flat:c.getFlats())
             System.out.println("flat "+flat.getId()+": "+flat.costs());
     }
+
     public static void main(String[] args) {
         Scanner scan=new Scanner(System.in);
         Owner[] owners=ownersList();
