@@ -58,7 +58,7 @@ public class Flat {
     }
 
     public void setThousands(double totSurface) {
-        this.thousands = (totSurface/surface)/1000;
+        this.thousands = totSurface/surface/1000;
     }
 
     public int getPeople() {
@@ -94,11 +94,8 @@ public class Flat {
         this.heatingTime += time;
     }
 
-    public double costs() {return ((this.heatingTime * HEATINGFEE) + thousands) + ((this.waterConsumption / 100)*WATERFEE);}
+    public double costs(int totHeatingTime) {return (this.waterConsumption / 100*WATERFEE)+(this.heatingTime/2*HEATINGFEE)+(totHeatingTime*this.thousands);}
 
-    public String costsToString() {
-        return "Flat" + id + ", costs=" + costs();
-    }
     public String toString() {
         return "Flat" + id +
                 ", compartments=" + compartments +

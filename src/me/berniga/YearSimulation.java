@@ -14,15 +14,16 @@ public class YearSimulation {
             owners[i]=new Owner(tempNames[i],tempSurnames[i]);
         return owners;
     }
-    
+
     //INSTANCING OF THE CONDOMINIUM ARRAY (RETURNS THE ARRAY)
     public static Condominium[] condominiumList(Owner[] owners){
         Condominium[] condominiums=new Condominium[3];
         for(int j=0;j<condominiums.length;j++){
             condominiums[j]=new Condominium();
             for(int i=0;i<10;i++)
-                condominiums[j].addFlat(owners[new Random().nextInt(owners.length)].getId(),new Random().nextInt(8)+1,new Random().nextInt(40)+40,new Random().nextInt(4)+1);
-            int totSurface=condominiums[j].surface();
+                condominiums[j].addFlat(owners[new Random().nextInt(owners.length)].getId(),new Random().nextInt(15)+1,new Random().nextInt(80)+30,new Random().nextInt(4)+1);
+            condominiums[j].surface();
+            int totSurface=condominiums[j].getSurface();
             for(int i=0;i<condominiums[j].getFlatsNumber();i++)
                 condominiums[j].getFlat(i).setThousands(totSurface);
         }
@@ -46,25 +47,29 @@ public class YearSimulation {
    - the third one shows the costs off all the flats in a coiched condominium;
     */
     public static void showFlats(int ownerId,Condominium[] condominiums,int action){
-        for(Condominium c:condominiums)
+        for(Condominium c:condominiums){
+            int totHeating=c.getHeatingTime();
             for(Flat f:c.getFlats())
                 if(f.getOwnerId()==ownerId){
                     if(action==0)   System.out.println(f.toString());
-                    else    System.out.println(f.costsToString());
+                    else    System.out.println("Flat "+f.getId()+" costs="+f.costs(totHeating));
                 }
+        }
     }
 
     public static void showFlats(int flatId,Condominium condominium){
-            for(Flat f:condominium.getFlats())
+        int totHeating=condominium.getHeatingTime();
+        for(Flat f:condominium.getFlats())
                     if(flatId==f.getId())   {
-                        System.out.println(f.costsToString());
+                        System.out.println("Flat "+f.getId()+" costs="+f.costs(totHeating));
                         break;
                     }
     }
 
     public static void showFlats(Condominium condominium){
+        int totHeating=condominium.getHeatingTime();
         for(Flat f:condominium.getFlats())
-                System.out.println(f.costsToString());
+                System.out.println("Flat "+f.getId()+" costs="+f.costs(totHeating));
     }
 
     /*MANAGES INPUTS
@@ -89,7 +94,7 @@ public class YearSimulation {
                     System.out.println("\tHere are the possible choices:");
                     System.out.println("\t-Type ALL to see all his flats ");
                     System.out.println("\t-Type COST to see the costs of all his flats ");
-                    System.out.printf("\t-Type your choice: ");
+                    System.out.printf("\tType your choice: ");
                     //subOption=scan.nextLine();
                     switch(scan.nextLine()){
                         case "ALL":
@@ -119,7 +124,7 @@ public class YearSimulation {
                 System.out.println("\tHere are the possible choices:");
                 System.out.println("\t-Type ALL to see the costs of all flats ");
                 System.out.println("\t-Type SINGLE to see the costs of a specified flat");
-                System.out.println("\t-Type your choice: ");
+                System.out.println("\tType your choice: ");
                 //subOption=scan.nextLine();
                 switch(scan.nextLine()){
                     case "ALL":
@@ -151,17 +156,11 @@ public class YearSimulation {
                 for(int k=0;k<c.getFlatsNumber();k++){
                     Flat temp=c.getFlat(k);
                     temp.shower(new Random().nextInt(temp.getPeople())+1);
-                    if(j<4||j>9)   temp.heating((new Random().nextInt(5)+6)+((new Random().nextInt(5)+1)));
+                    if(j<4||j>9)   temp.heating(new Random().nextInt(9)+7);
                 }
                 date=date.plusDays(1);
             }
         }
-    }
-
-    //PRINTS THE COSTS FOR ALL THE FLATS OF A CONDOMINIUM
-    public static void costs(Condominium c){
-        for(Flat flat:c.getFlats())
-            System.out.println("flat "+flat.getId()+": "+flat.costs());
     }
 
     public static void main(String[] args) {

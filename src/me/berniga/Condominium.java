@@ -6,6 +6,8 @@ public class Condominium {
     private static int condominiums = 0;
     private final int id;
     private ArrayList<Flat> flats = new ArrayList<Flat>();
+    private int surface;
+    private int heatingTime;
 
     //constructors
     public Condominium() {
@@ -27,15 +29,22 @@ public class Condominium {
         return flats.get(i);
     }
 
+    public int getSurface() {return surface;}
+
+    public int getHeatingTime() {return heatingTime;}
+
     //methods
     public void addFlat(int ownerId, int compartements, int surface, int people) {
         flats.add(new Flat(ownerId, compartements, surface, people));
     }
 
-    public int surface() {
-        int totSurface = 0;
-        for (Flat flat : flats) totSurface += flat.getSurface();
-        return totSurface;
+    public void surface() {
+        for (Flat flat : flats) this.surface += flat.getSurface();
     }
+
+    public void heatingTime(){
+        for(Flat f:flats) this.heatingTime+=f.getHeatingTime();
+    }
+
 
 }
