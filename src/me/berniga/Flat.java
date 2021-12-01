@@ -1,8 +1,8 @@
 package me.berniga;
 
 public class Flat {
-    private final int WATERFEE = 1;
-    private final int HEATINGFEE = 4;
+    private static final int WATERFEE = 1;
+    private static final int HEATINGFEE = 4;
     private static int flats = 0;
     private final int id;
     private int ownerId;
@@ -58,7 +58,7 @@ public class Flat {
     }
 
     public void setThousands(double totSurface) {
-        this.thousands = (1000 * surface) / totSurface;
+        this.thousands = (totSurface/surface)/1000;
     }
 
     public int getPeople() {
@@ -95,5 +95,18 @@ public class Flat {
     }
 
     public double costs() {return ((this.heatingTime * HEATINGFEE) + thousands) + ((this.waterConsumption / 100)*WATERFEE);}
+
+    public String costsToString() {
+        return "Flat" + id + ", costs=" + costs();
+    }
+    public String toString() {
+        return "Flat" + id +
+                ", compartments=" + compartments +
+                ", surface=" + surface +
+                ", thousands=" + thousands +
+                ", people=" + people +
+                ", waterConsumption=" + waterConsumption +
+                ", heatingTime=" + heatingTime;
+    }
 
 }

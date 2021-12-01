@@ -12,16 +12,20 @@ public class Owner {
         this.name = name;
         this.surname = surname;
     }
+
     //getters & setters
     public int getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getSurname() {
         return surname;
     }
@@ -29,6 +33,7 @@ public class Owner {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
     //methods
     public String toString(){return name+" "+surname;}
 }

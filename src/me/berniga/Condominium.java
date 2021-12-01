@@ -5,26 +5,16 @@ import java.util.ArrayList;
 public class Condominium {
     private static int condominiums = 0;
     private final int id;
-    private int ownerId;
     private ArrayList<Flat> flats = new ArrayList<Flat>();
 
     //constructors
-    public Condominium(int ownerId) {
+    public Condominium() {
         id = ++condominiums;
-        this.ownerId = ownerId;
     }
-    //getters and setters
 
+    //getters and setters
     public int getId() {
         return id;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
     }
 
     public ArrayList<Flat> getFlats() {return flats;}
