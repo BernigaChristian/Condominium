@@ -28,10 +28,10 @@ public class YearSimulation {
         return condominiums;
     }
     //RETURNS THE OWNER ID OF THE GIVEN NAME
-    public static int id(String name,Owner[] owners)    throws InvalidNameorId{
+    public static int id(String name,Owner[] owners)    throws InvalidNameorIdException {
         for(Owner o:owners)
             if(o.getName().equalsIgnoreCase(name))  return o.getId();
-        throw new InvalidNameorId();
+        throw new InvalidNameorIdException();
     }
     //SHOWS THE COSTS OF FLATS OF A OWNER OR SIMPLY THE FLATS (IT DEPENDS ON THE VARIABLE ACTION)
     public static void showFlats(int ownerId,Condominium[] condominiums,int action){
@@ -87,7 +87,7 @@ public class YearSimulation {
                             System.out.println("\tINVALID COMMAND");
                     }
                 }
-                catch(InvalidNameorId e){
+                catch(InvalidNameorIdException e){
                     System.out.println("THE CHOICED OWNER DOESN'T EXIST");
                 }
 
